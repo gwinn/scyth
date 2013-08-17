@@ -53,13 +53,6 @@ function __autoload($class_name)
 
 $app = App::getInstance();
 
-$app->set('config', $conf);
-$app->set('db',     new Database($app));
-$app->set('model',  new Model($app));
-$app->set('view',   new View($app));
-$app->set('router', new Router($app));
-$app->set('cypher', new Cypher());
-
 /*
  * Run app
  *
