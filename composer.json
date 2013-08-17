@@ -1,8 +1,16 @@
 {
-    "name": "scyth/framework",
+    "name": "gwinn/scyth",
     "license": "MIT",
     "type": "project",
     "description": "Scyth framework",
+    "authors": [
+        {
+            "name": "Alex Lushpai",
+            "email": "alex@lushpai.org",
+            "homepage": "http://lushpai.org",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "psr-0": { "": "core/" }
     },
@@ -14,7 +22,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "gwinn/scyth": "dev-master",
+        "gwinn/scyth": "@dev",
         "twig/extensions": "dev-master"
     },
     "minimum-stability": "dev"
