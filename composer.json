@@ -1,5 +1,5 @@
 {
-    "name": "gwinn/scyth",
+    "name": "scyth/scyth",
     "license": "MIT",
     "type": "project",
     "description": "Scyth framework",
@@ -12,7 +12,7 @@
         }
     ],
     "autoload": {
-        "psr-0": { "": "core/" }
+        "psr-0": { "Scyth": "src" }
     },
     "repositories": [
         {
@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "gwinn/scyth": "@dev",
+        "gwinn/scyth": "dev-master",
         "twig/extensions": "dev-master"
     },
     "minimum-stability": "dev"
