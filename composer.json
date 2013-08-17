@@ -1,5 +1,5 @@
 {
-    "name": "scyth/scyth",
+    "name": "gwinn/scyth",
     "license": "MIT",
     "type": "project",
     "description": "Scyth framework",
@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "gwinn/scyth": "dev-master",
+        "gwinn/scyth": "dev",
         "twig/extensions": "dev-master"
     },
     "minimum-stability": "dev"
