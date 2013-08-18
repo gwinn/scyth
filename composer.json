@@ -16,6 +16,8 @@
         "psr-0": { "Scyth": "src" }
     },
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "symfony/yaml": "2.4.*@dev",
+        "twig/twig": "1.14.*@dev"
     }
 }
