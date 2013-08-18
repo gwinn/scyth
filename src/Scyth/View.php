@@ -14,6 +14,8 @@
  */
 
 
+namespace Scyth;
+
 /**
  *  View base class
  *

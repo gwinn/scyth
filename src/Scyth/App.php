@@ -1,5 +1,7 @@
 <?php
 
+namespace Scyth;
+
 class App implements ArrayAccess
 {
     private $vars = array();

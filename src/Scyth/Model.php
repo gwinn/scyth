@@ -13,6 +13,7 @@
  *
  */
 
+namespace Scyth;
 
 /**
  *  Model base class
@@ -25,7 +26,7 @@
  *
  */
 
-class Model 
+class Model
 {
 
     protected $app;

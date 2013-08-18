@@ -1,5 +1,7 @@
 <?php
 
+namespace Scyth;
+
 class Router
 {
     private $app;
@@ -15,7 +17,7 @@ class Router
     {
         $path = trim($path, '/\\/');
         $path .= DIR_SEP;
-        
+
         if (!is_dir($path))
         {
             throw new Exception ('Invalid controller path: `' . $path . '`');

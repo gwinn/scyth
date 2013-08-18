@@ -13,6 +13,7 @@
  *
  */
 
+namespace Scyth\Service;
 
 /**
  *  Cypher base class
@@ -36,7 +37,7 @@ class Cypher {
      *  @return string iv+ciphertext+mac or
      * boolean false on error
      */
-    public function encrypt( $msg, $k, $base64 = false ) 
+    public function encrypt( $msg, $k, $base64 = false )
     {
         # open cipher module (do not change cipher/mode)
         if ( ! $td = mcrypt_module_open('rijndael-256', '', 'ctr', '') ) {

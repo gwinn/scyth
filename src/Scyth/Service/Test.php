@@ -13,6 +13,7 @@
  *
  */
 
+namespace Scyth\Service;
 
 /**
  *  Test class
@@ -31,7 +32,7 @@ class Test {
      *
      * @return void
      */
-    public function test()
+    public static function test()
     {
         echo 1;
     }

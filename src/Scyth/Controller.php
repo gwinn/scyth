@@ -13,6 +13,7 @@
  *
  */
 
+namespace Scyth;
 
 /**
  *  Controller base class
@@ -44,7 +45,7 @@ abstract class Controller
         $str = explode("/", $_SERVER['REQUEST_URI']);
         $this->app->get('view')->set('layout',  $str[1]);
     }
-    
+
     /**
      * Abstract index
      *
@@ -53,7 +54,7 @@ abstract class Controller
      */
 
     abstract function index();
-    
+
     /**
     * 404 http error handler
     *

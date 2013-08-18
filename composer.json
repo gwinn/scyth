@@ -13,7 +13,7 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Scyth": "core" }
+        "psr-0": { "Scyth": "src" }
     },
     "require": {
         "php": ">=5.4.0"

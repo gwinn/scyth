@@ -13,6 +13,7 @@
  *
  */
 
+namespace Scyth;
 
 /**
  *  Database base class
@@ -42,7 +43,7 @@ class Database extends PDO
         parent::__construct(
             $this->app['config']['db']['driver'] . ':host=' .
             $this->app['config']['db']['host'] . ';dbname=' .
-            $this->app['config']['db']['database'], 
+            $this->app['config']['db']['database'],
             $this->app['config']['db']['user'],
             $this->app['config']['db']['password']
         );
