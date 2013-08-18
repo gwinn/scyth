@@ -1,8 +1,9 @@
 {
     "name": "gwinn/scyth",
-    "license": "MIT",
-    "type": "project",
+    "type": "library",
+    "keywords": ["framework"],
     "description": "Scyth framework",
+    "license": "MIT",
     "authors": [
         {
             "name": "Alex Lushpai",
@@ -12,7 +13,7 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Scyth": "src" }
+        "psr-0": { "Scyth": "core" }
     },
     "repositories": [
         {
@@ -22,8 +23,13 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "gwinn/scyth": "dev",
+        "gwinn/scyth": "dev-master",
         "twig/extensions": "dev-master"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "dev"
+        }
+    }
 }

@@ -1,1 +1,0 @@
-<span style="color: #562034">Page not found</span>
