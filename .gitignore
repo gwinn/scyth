@@ -4,3 +4,4 @@
 /*tag*
 /vendor
 *.lock
+/composer.phar
