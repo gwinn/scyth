@@ -1,124 +1,170 @@
 <?php
 
 /**
- *  Cypher
+ * Cypher
  *
- *  PHP Version 5.5
+ * PHP Version 5.5
  *
- *  @category Security
- *  @package  Scyth
- *  @author   Alex Lushpai <alex@lushpai.org>
- *  @license  MIT http://opensource.org/licenses/MIT
- *  @link     https://github.com/gwinn/ScythBundle/blob/master/README.md
+ * @category Security
+ * @package  Scyth
+ * @author   Alex Lushpai <alex@lushpai.org>
+ * @license  MIT http://opensource.org/licenses/MIT
+ * @link     https://github.com/gwinn/ScythBundle/blob/master/README.md
  *
  */
 
 namespace Scyth\Component\Security;
 
+use Exception;
+
 /**
- *  Cypher class
+ * Cypher class
  *
- *  @category Security
- *  @package  Scyth
- *  @author   Alex Lushpai <alex@lushpai.org>
- *  @license  MIT http://opensource.org/licenses/MIT
- *  @link     https://github.com/gwinn/ScythBundle/blob/master/README.md
+ * @category Security
+ * @package  Scyth
+ * @author   Alex Lushpai <alex@lushpai.org>
+ * @license  MIT http://opensource.org/licenses/MIT
+ * @link     https://github.com/gwinn/ScythBundle/blob/master/README.md
  *
  */
 
 class Cypher
 {
 
-    /** Encryption Procedure
+    /**
+     * Encryption Procedure
      *
-     *  @param mixed   $msg    message/data
-     *  @param string  $key    encryption key
-     *  @param boolean $base64 base64 encode result
+     * @param mixed $msg message/data
+     * @param string $key encryption key
+     * @param boolean $base64 base64 encode result
+     * @param string $algorythm mcrypt algorithm
+     * @param string $mode mcrypt mode
      *
-     *  @return string iv+ciphertext+mac or boolean false on error
+     * @throws \Exception
+     * @return string iv+ciphertext+mac
      */
-    public function encrypt($msg, $key, $base64 = false)
+    public function encrypt($msg, $key, $base64 = false, $algorythm, $mode)
     {
+        if (!in_array($algorythm, mcrypt_list_algorithms()))
+        {
+            throw new Exception('Wrong mcrypt algorithm. Use mcrypt_list_algorithms() for list available algorythm.');
+        }
+
+        if (!in_array($mode, mcrypt_list_modes()))
+        {
+            throw new Exception('Wrong mcrypt mode. Use mcrypt_list_modes() for list available mode.');
+        }
+
         if (!$td = mcrypt_module_open('rijndael-256', '', 'ctr', '')) {
-            return false;
+            throw new Exception('Can not open mcrypt module');
         }
 
         $msg = serialize($msg);
-        $iv = mcrypt_create_iv(
+        $initializationVector = mcrypt_create_iv(
             mcrypt_enc_get_iv_size($td),
             MCRYPT_DEV_RANDOM
         );
 
-        if (mcrypt_generic_init($td, $key, $iv) !== 0) {
-            return false;
+        if (mcrypt_generic_init($td, $key, $initializationVector) !== 0) {
+            throw new Exception('Can not init mcrypt');
         }
 
-        $msg = mcrypt_generic($td, $msg);
-        $msg = $iv . $msg;
-        $mac = $this->pbkdf2($msg, $key, 1000, 32);
-        $msg .= $mac;
+        try {
 
-        mcrypt_generic_deinit($td);
-        mcrypt_module_close($td);
+            $msg = mcrypt_generic($td, $msg);
+            $msg = $initializationVector . $msg;
+            $mac = $this->pbkdf2($msg, $key, 1000, 32);
+            $msg .= $mac;
 
-        if ($base64) {
-            $msg = base64_encode($msg);
+            mcrypt_generic_deinit($td);
+            mcrypt_module_close($td);
+
+            if ($base64) {
+                $msg = base64_encode($msg);
+            }
+
+            return $msg;
+
+        } catch (Exception $e) {
+            return 'Caught exception: ' . $e->getMessage();
         }
-
-        return $msg;
     }
 
-    /** Decryption Procedure
+    /**
+     * Decryption Procedure
      *
-     *  @param string  $msg    output from encrypt()
-     *  @param string  $key    encryption key
-     *  @param boolean $base64 base64 decode msg
+     * @param string $msg output from encrypt()
+     * @param string $key encryption key
+     * @param boolean $base64 base64 decode msg
+     * @param string $algorythm mcrypt algorithm
+     * @param string $mode mcrypt mode
      *
-     *  @return string original message/data
+     * @throws \Exception
+     * @return string original message/data
      */
-    public function decrypt($msg, $key, $base64 = false)
+    public function decrypt($msg, $key, $base64 = false, $algorythm, $mode)
     {
         if ($base64) {
             $msg = base64_decode($msg);
         }
 
-        if (! $td = mcrypt_module_open('rijndael-256', '', 'ctr', '')) {
-            return false;
+        if (!in_array($algorythm, mcrypt_list_algorithms()))
+        {
+            throw new Exception('Wrong mcrypt algorithm. Use mcrypt_list_algorithms() for list available algorythm.');
         }
 
-        $iv = substr($msg, 0, mcrypt_enc_get_iv_size($td));
-        $mo = strlen($msg) - mcrypt_enc_get_iv_size($td);
-        $em = substr($msg, $mo);
-        $msg = substr(
-            $msg,
-            mcrypt_enc_get_iv_size($td),
-            strlen($msg)-(mcrypt_enc_get_iv_size($td)*2)
-        );
-        $mac = $this->pbkdf2(
-            $iv . $msg,
-            $key,
-            1000,
-            mcrypt_enc_get_iv_size($td)
-        );
+        if (!in_array($mode, mcrypt_list_modes()))
+        {
+            throw new Exception('Wrong mcrypt mode. Use mcrypt_list_modes() for list available mode.');
+        }
+
+        if (!$td = mcrypt_module_open('rijndael-256', '', 'ctr', '')) {
+            throw new Exception('Can not open mcrypt module');
+        }
+
+        try {
+            $initializationVector = substr($msg, 0, mcrypt_enc_get_iv_size($td));
+            $mo = strlen($msg) - mcrypt_enc_get_iv_size($td);
+            $em = substr($msg, $mo);
+            $msg = substr(
+                $msg,
+                mcrypt_enc_get_iv_size($td),
+                strlen($msg)-(mcrypt_enc_get_iv_size($td)*2)
+            );
+
+            $mac = $this->pbkdf2(
+                $initializationVector . $msg,
+                $key,
+                1000,
+                mcrypt_enc_get_iv_size($td)
+            );
+        } catch (Exception $e) {
+            return 'Caught exception: ' . $e->getMessage();
+        }
 
         if ($em !== $mac) {
-            return false;
+            throw new Exception('Can not init mcrypt');
         }
 
-        if (mcrypt_generic_init($td, $key, $iv) !== 0) {
-            return false;
+        if (mcrypt_generic_init($td, $key, $initializationVector) !== 0) {
+            throw new Exception('Can not init mcrypt');
         }
 
-        $msg = mdecrypt_generic($td, $msg);
-        $msg = unserialize($msg);
+        try {
+            $msg = mdecrypt_generic($td, $msg);
+            $msg = unserialize($msg);
 
-        mcrypt_generic_deinit($td);
-        mcrypt_module_close($td);
+            mcrypt_generic_deinit($td);
+            mcrypt_module_close($td);
 
-        return trim($msg);
+            return trim($msg);
+        } catch (Exception $e) {
+            return 'Caught exception: ' . $e->getMessage();
+        }
     }
 
-    /** PBKDF2 Implementation (as described in RFC 2898);
+    /**
+     * PBKDF2 Implementation (as described in RFC 2898);
      *
      *  @param string $password       password
      *  @param string $salt           salt
