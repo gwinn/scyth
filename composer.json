@@ -1,23 +1,29 @@
 {
-    "name": "gwinn/scyth",
-    "type": "library",
-    "keywords": ["framework"],
-    "description": "Scyth framework",
+    "name": "gwinn/scyth-bundle",
+    "description": "System tools for symfony2 based projects",
+    "keywords": ["symfony tools", "system", "security"],
+    "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
         {
-            "name": "Alex Lushpai",
-            "email": "alex@lushpai.org",
+            "name":     "Alex Lushpai",
             "homepage": "http://lushpai.org",
-            "role": "Developer"
+            "email":    "alex@lushpai.org"
         }
     ],
-    "autoload": {
-        "psr-0": { "Scyth": "src" }
-    },
     "require": {
-        "php": ">=5.4.0",
-        "symfony/yaml": "v2.3.3",
-        "twig/twig": "v1.13.2"
+        "php":             ">=5.3.0",
+        "symfony/symfony": ">=2.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Gwinn\\ScythBundle": ""
+        }
+    },
+    "target-dir" : "Gwinn/ScythBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
 }
