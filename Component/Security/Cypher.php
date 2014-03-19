@@ -55,7 +55,7 @@ class Cypher
             throw new Exception('Wrong mcrypt mode. Use mcrypt_list_modes() for list available mode.');
         }
 
-        if (!$td = mcrypt_module_open('rijndael-256', '', 'ctr', '')) {
+        if (!$td = mcrypt_module_open($algorythm, '', $mode, '')) {
             throw new Exception('Can not open mcrypt module');
         }
 
@@ -118,7 +118,7 @@ class Cypher
             throw new Exception('Wrong mcrypt mode. Use mcrypt_list_modes() for list available mode.');
         }
 
-        if (!$td = mcrypt_module_open('rijndael-256', '', 'ctr', '')) {
+        if (!$td = mcrypt_module_open($algorythm, '', $mode, '')) {
             throw new Exception('Can not open mcrypt module');
         }
 
