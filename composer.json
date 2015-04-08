@@ -1,5 +1,5 @@
 {
-    "name": "gwinn/scyth-bundle",
+    "name": "gwinn/scyth",
     "description": "System tools for symfony2 based projects",
     "keywords": ["symfony tools", "system", "security"],
     "type": "symfony-bundle",
@@ -7,23 +7,22 @@
     "authors": [
         {
             "name":     "Alex Lushpai",
-            "homepage": "http://lushpai.org",
-            "email":    "alex@lushpai.org"
+            "homepage": "http://gwinn.ru",
+            "email":    "lushpai@gmail.com"
         }
     ],
+    "support": {
+        "email": "lushpai@gmail.com"
+    },
     "require": {
-        "php":             ">=5.3.0",
-        "symfony/symfony": ">=2.1"
+        "php": ">=5.3.3",
     },
     "autoload": {
-        "psr-0": {
-            "Gwinn\\ScythBundle": ""
-        }
+      "psr-0": { "": "src/"}
     },
-    "target-dir" : "Gwinn/ScythBundle",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
+      "minimum-stability": "dev",
+    "config": {
+      "bin-dir": "bin",
+      "process-timeout": 600
     }
 }

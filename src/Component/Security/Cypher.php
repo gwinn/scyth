@@ -3,13 +3,13 @@
 /**
  * Cypher
  *
- * PHP Version 5.5
+ * PHP Version 5.3
  *
  * @category Security
  * @package  Scyth
- * @author   Alex Lushpai <alex@lushpai.org>
+ * @author   Alex Lushpai <lushpai@gmail.com>
  * @license  MIT http://opensource.org/licenses/MIT
- * @link     https://github.com/gwinn/ScythBundle/blob/master/README.md
+ * @link     https://github.com/gwinn/scyth/blob/master/README.md
  *
  */
 
@@ -22,9 +22,9 @@ use Exception;
  *
  * @category Security
  * @package  Scyth
- * @author   Alex Lushpai <alex@lushpai.org>
+ * @author   Alex Lushpai <lushpai@gmail.com>
  * @license  MIT http://opensource.org/licenses/MIT
- * @link     https://github.com/gwinn/ScythBundle/blob/master/README.md
+ * @link     https://github.com/gwinn/scyth/blob/master/README.md
  *
  */
 
