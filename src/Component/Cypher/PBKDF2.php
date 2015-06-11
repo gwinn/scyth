@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Cypher
+ * PBKDF2
  *
  * PHP Version 5.3
  *
- * @category Security
+ * @category Cypher
  * @package  Scyth
  * @author   Alex Lushpai <lushpai@gmail.com>
  * @license  MIT http://opensource.org/licenses/MIT
@@ -13,14 +13,14 @@
  *
  */
 
-namespace Scyth\Component\Security;
+namespace Scyth\Component\Cypher;
 
 use Exception;
 
 /**
- * Cypher class
+ * PBKDF2 class
  *
- * @category Security
+ * @category Cypher
  * @package  Scyth
  * @author   Alex Lushpai <lushpai@gmail.com>
  * @license  MIT http://opensource.org/licenses/MIT
@@ -28,7 +28,7 @@ use Exception;
  *
  */
 
-class Cypher
+class PBKDF2
 {
 
     /**
